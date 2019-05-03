@@ -26,6 +26,7 @@ https://ionicframework.com/docs/installation/ios
 
 1) Install xcode (https://developer.apple.com/xcode/)
 2) npm run build
-3) cordova build ios
-4) open xcodeproject created in platform folder in xcode.
-5) build project and select device and run it
+3) cordova platform add ios
+4) cordova build ios
+5) open xcodeproject created in platform folder in xcode.
+6) build project and select device and run it
