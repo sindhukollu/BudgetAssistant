@@ -1,0 +1,169 @@
+page-home {
+  .scroll-content{
+    padding: 0 !important;
+  }
+  .datepicker-section{
+    margin: 0;
+    position: fixed;
+    width: 100%;
+    background: white;
+    z-index: 20;
+    top: --page-content-top
+  }
+  .page-content{
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+    height: 100%;
+    margin-bottom: 120px !important;
+    overflow-y: auto;
+    padding: 50px 0;
+
+    .budget-notes{
+        background: lighten($color: $danger, $amount: 25%);
+        padding: 16px 16px 24px;
+        ion-icon{
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+    .ex-in-card{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .details{
+          width: 100%;
+          .desc{
+              font-size: 16px;
+              font-weight: 500;
+              margin-bottom: 5px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              ion-icon{
+                  font-size: 20px;
+                  color: $primary;
+              }
+          }
+          .category{
+              font-size: 12px;
+              color: $muted;
+          }
+      }
+      .cost{
+          font-size: 16px;
+          font-weight: 600;
+          // color: $danger;
+          &.income{
+              color: $green;
+          }
+      }
+    }
+
+    .receipt-item{
+      .receipt-info{
+        border-top: none;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        .receipt-merchant-details{
+          width: 75%;
+          color: $dark;
+          .receipt-merchant-name{
+            font-size: 16px;
+            font-weight: 500;
+            padding-bottom: 5px;
+            text-transform: capitalize;
+          }
+          .receipt-merchant-type{
+            font-size: 12px;
+            color: $muted;
+          }
+          .receipt-payment-type{
+            font-size: 12px;
+            color: $muted;
+          }
+          .receipt-date{
+            font-size: 12px;
+            color: $muted;
+          }
+        }
+        .receipt-total{
+          font-size: 16px;
+          display: flex;
+          .cost{
+              font-size: 16px;
+              font-weight: 600;
+              // color: $danger;
+              &.income{
+                  color: $green;
+              }
+          }
+          .icon{
+            padding-left: 12px;
+          }
+        }
+      }
+      // .receipt-line-items{
+        .receipt-line-item{
+          font-size: 14px;
+          color: $muted;
+          .label{
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .receipt-line-item-desc{
+            width: 80%;
+            white-space: pre-wrap;
+          }
+          .receipt-line-item-amount{
+
+          }
+
+          
+        }
+        .receipt-line-item:last-child{
+          .item-inner{
+            border-bottom: 0 !important;
+          }
+        }
+
+      // }
+    }
+
+    .item-inner{
+      padding-right: 0 !important;
+      margin-right: 8px;
+      border-bottom: 0 !important;
+      text-transform: capitalize;
+    }
+
+
+  }
+
+  .camera-btn-wrap{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      align-self: flex-end;
+      z-index: 1;
+      position: absolute;
+      bottom: 56px;
+      padding: 8px 0;
+      .icon{
+        font-size: 2.2em;
+        border: 1px solid gray;
+        border-radius: 50%;
+        padding: 8px 10px;
+        background: white;
+        color: black;
+
+        input{
+          width: 14px;
+        }
+      }
+    }
+
+}

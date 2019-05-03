@@ -1,0 +1,77 @@
+budget-options-modal {
+    ion-label[fixed]{
+        font-size: 16px;
+        color: $dark !important;
+    }
+    ion-input{
+        font-size: 16px;
+    }
+    bp-currency {
+        font-size: 12px;
+    }
+    .form-sec-header{
+        font-size: 14px;
+        color: $muted;
+        font-weight: 600;
+        padding: 8px 16px;
+    }
+    .category-budget-section{
+        padding: 32px 0;
+        .item-row{
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid $border;
+            padding: 8px 0;
+            .button[icon-only] {
+                padding: 0;
+                min-width: .9em;
+                border-radius: 50%;
+                height: 24px;
+                width: 24px;
+                ion-icon{
+                    font-size: 16px;
+                }
+            }
+            ion-select{
+                flex: 1;
+                font-size: 16px;
+                button{
+                    display: none;
+                }
+            }
+            .input-wrap{
+                display: flex;
+                flex: 1;
+                align-items: center;
+                padding-left: 16px;
+            }
+            ion-icon{
+                padding: 8px;
+            }
+        }
+    }
+    ion-footer{
+        &.footer:before{
+            top: 0;
+        }
+        .toolbar{
+            padding: 0;
+            .toolbar-background{
+                background-color: $default;
+            }
+            button{
+                width: 100%;
+                margin:0;
+            }
+            .toolbar-title{
+                display: flex;
+                justify-content: center;
+            }
+        }
+        .toolbar-md{
+            .button{
+                height: 56px;;
+            }
+        }
+    }
+}

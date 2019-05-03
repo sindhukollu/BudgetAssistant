@@ -1,0 +1,38 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{selectedCategory}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="list">
+    <!-- <div class="list-item" *ngFor="let item of categoryItems">
+      <div class="category">{{item.description}}</div>
+      <div class="value">${{item.amount}}</div>
+    </div> -->
+
+    <div class="list-item"  *ngFor="let item of categoryItems">
+      <div class="details">
+        <div class="desc">
+          <div>{{item.merchantName || item.category}}</div>
+          <div class="cost">
+              <bp-currency></bp-currency>{{item.totalAmount || item.amount}}
+          </div>
+        </div>
+        <div class="category">{{item.displayDate}}</div>
+      </div>
+    </div>
+
+  </div>
+
+
+</ion-content>

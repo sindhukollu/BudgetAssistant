@@ -1,0 +1,49 @@
+
+<ion-header>
+    <ion-navbar>
+        <ion-title>Smart Budget</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div class="login-page">
+    <div class="login-container">
+          <div class="err-msg align-center" *ngIf="errMsg">{{errMsg}}</div>
+          <div class="sign-in-form" *ngIf="showAuthFromType === authFormTypes.SIGNIN">
+              <!-- <div class="header">Log In</div> -->
+              <input [(ngModel)]="email" type="email" placeholder="Email Id">
+              <input [(ngModel)]="password" type="password"  placeholder="Password">
+
+              <button (click)="loginWithEmailAndPassword()">Login</button>
+              <div class="toggle-link" (click)="toggleForm(authFormTypes.FORGOT_PASSWORD)">Forgot password? <span>Reset</span></div>
+              <div class="toggle-link" (click)="toggleForm(authFormTypes.SIGNUP)">New User? <span>Sign Up</span></div>
+              <!-- <button class="google-btn margin-16" (click)="loginWithGoogleAuthProvider()"><i class="fa fa-google"></i>Login with Google</button> -->
+          </div>
+          <div class="sign-up-form" *ngIf="showAuthFromType === authFormTypes.SIGNUP">
+              <!-- <div class="header">Sign Up</div> -->
+              <input [(ngModel)]="name" type="text"  placeholder="Name">
+              <input [(ngModel)]="company" type="text"  placeholder="Company (optional)">
+              <input [(ngModel)]="email" type="email"  placeholder="Email Id">
+              <input [(ngModel)]="password" type="password"  placeholder="Password">
+
+              <button (click)="signUpWithEmailAndPassword()">Sign Up</button>
+              <div class="toggle-link" (click)="toggleForm(authFormTypes.SIGNIN)">Have account? <span>Login</span></div>
+              <!-- <button class="google-btn margin-16" (click)="loginWithGoogleAuthProvider()"><i class="fa fa-google"></i>Login with Google</button> -->
+
+          </div>
+          <div class="forgot-password-form" *ngIf="showAuthFromType === authFormTypes.FORGOT_PASSWORD">
+            <div *ngIf="!isEmailSent">
+                <div class="header">Forgot Password</div>
+                <input [(ngModel)]="email" type="email"  placeholder="Email Id">
+                <button (click)="sendPasswordResetLink()">Send Reset Link</button>
+                <div class="toggle-link" (click)="toggleForm(authFormTypes.SIGNIN)">Go back to <span>Login</span></div>
+            </div>
+            <div *ngIf="isEmailSent" class="success-msg align-center">
+                Reset link sent successfully. Please check you inbox for steps to reset password <br>
+                <button class="margin-top-16" (click)="toggleForm(authFormTypes.SIGNIN)">Ok</button>
+          </div>
+
+        </div>
+
+    </div>
+  </div>
+</ion-content>

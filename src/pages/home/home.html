@@ -1,0 +1,112 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Expenses</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- Date Picker -->
+  <div class="datepicker-section">
+      <bp-datepicker #datepicker [date]="selectedDateRange?.startDate" [timeFrameIndex]="selectedDateRange?.timeFrameIndex" (onDateChange)="onDateChange($event)"></bp-datepicker>
+    <!-- <bp-datepicker (onDateChange)="onDateChange($event)"></bp-datepicker> -->
+  </div>
+  <div class="page-content">
+    <div class="no-data-msg" *ngIf="!groupedItems.length">Scan receipts/enter manually to get started</div>
+    <div class="budget-notes" *ngIf="showBudgetNotes && budgetNotifications.length">
+      <div><ion-icon name="close" (click)="hideBudgetNotes()"></ion-icon></div>
+      <div padding-horizontal>
+        <li *ngFor="let note of budgetNotifications">{{note}}</li>
+      </div>
+    </div>
+    <!-- RECEIPTS -->
+    <!-- <div class="receipt-list">
+      <ion-list class="receipt-item" *ngFor="let receipt of filteredReceipts; let $index = index;">
+        <ion-list-header class="receipt-info">
+          <div class="receipt-merchant-details" (press)="deleteReceipt(receipt)" (tap)="showReceiptDeatilsModal(receipt, $index)">
+            <div class="receipt-merchant-name">{{receipt.merchantName || 'X X X X X'}}</div>
+            <div class="receipt-payment-type">Payment: {{receipt.paymentType || 'X X X X X'}}</div>
+            <div class="receipt-date"> {{receipt.displayDate}}</div>
+          </div>
+          <div class="receipt-total" (click)="toggleLineItemsDisplay($event, receipt)">
+              ${{receipt.totalAmount}}
+              <ion-icon name="ios-arrow-forward" *ngIf="!receipt.showLineItems"></ion-icon>
+              <ion-icon name="ios-arrow-down" *ngIf="receipt.showLineItems"></ion-icon>
+          </div>
+        </ion-list-header>
+        <ng-container *ngIf="receipt.showLineItems">
+          <ion-item class="receipt-line-item" *ngFor="let lineItem of receipt.lineItems">
+            <div class="receipt-line-item-desc">{{lineItem.text}}</div>
+            <div class="receipt-line-item-amount">${{lineItem.data}}</div>
+          </ion-item>
+        </ng-container>
+
+      </ion-list>
+    </div> -->
+
+    <!-- ITEMS -->
+    <ion-list *ngFor="let groupedItem of groupedItems">
+      <ion-list-header>
+        {{groupedItem.category}}
+      </ion-list-header>
+      <ion-item *ngFor="let item of groupedItem.items;let $index = index;" >
+        <div class="ex-in-card" *ngIf="!item.isReceipt" (press)="deleteItem(item)" (tap)="editItem(item)">
+          <div class="details">
+            <div class="desc">
+              <div>{{item.description}} <ion-icon name="repeat" *ngIf="item.repeats"></ion-icon></div>
+              <div class="cost">
+                {{item.type == 1 ? '' : '- '}}${{item.amount}}
+              </div>
+            </div>
+            <div class="category"> {{item.displayDate}}</div>
+          </div>
+          
+        </div>
+
+        <div class="receipt-item" *ngIf="item.isReceipt">
+          <div class="receipt-info">
+            <div class="receipt-merchant-details" (press)="deleteItem(item)" (tap)="editItem(item)">
+              <div class="receipt-merchant-name">{{item.merchantName || 'X X X X X'}}</div>
+              <div class="receipt-payment-type">Payment: {{item.paymentType || 'X X X X X'}}</div>
+              <div class="receipt-date"> {{item.displayDate}}</div>
+            </div>
+            <div class="receipt-total" (click)="toggleLineItemsDisplay($event, item)">
+                <span class="cost">{{item.type == 1 ? '' : '- '}}${{item.totalAmount}}</span>
+                <ion-icon name="ios-arrow-forward" *ngIf="(!item.showLineItems) && (item.lineItems && item.lineItems.length)"></ion-icon>
+                <ion-icon name="ios-arrow-down" *ngIf="item.showLineItems && item.lineItems.length"></ion-icon>
+            </div>
+          </div>
+          
+
+          <ng-container *ngIf="item.showLineItems">
+            <ion-item class="receipt-line-item" *ngFor="let lineItem of item.lineItems">
+              <div class="receipt-line-item-desc">{{lineItem.text}}</div>
+              <div class="receipt-line-item-amount">${{lineItem.data}}</div>
+            </ion-item>
+          </ng-container>
+        </div>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+  <ion-fab bottom right #fab>
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab color="primary" (click)="openAddItemModal(fab)"><ion-icon name="add"></ion-icon></button>
+    </ion-fab-list>
+    <ion-fab-list side="left">
+      <button ion-fab color="primary" (click)="openCamera(fab)"><ion-icon name="md-camera"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
+
+<div class="camera-btn-wrap">
+  <!-- <ion-icon name="md-camera">
+         <input type="file"
+                id="file"
+                (change)="handleFileInput($event.target.files)">
+  </ion-icon> -->
+
+</div>
+

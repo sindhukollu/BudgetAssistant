@@ -1,0 +1,7 @@
+{
+  "name": "SmartBudgetAssistant",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

@@ -1,0 +1,193 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Reports
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!-- Date Picker -->
+
+  <div class="datepicker-section" *ngIf="currentSlideIndex == 0">
+      <bp-datepicker #datepicker [date]="selectedDateRange?.startDate" [timeFrameIndex]="selectedDateRange?.timeFrameIndex" (onDateChange)="onDateChange($event)"></bp-datepicker>
+  </div>
+
+  <div class="page-content" [ngClass]="{'with-date-picker': currentSlideIndex == 0}">
+    <ion-slides (ionSlideDidChange)="onSlideChanged()" pager #slides>
+        <ion-slide>
+          <!-- Category Wise Chart -->
+          <div class="chart-section">
+            <div class="chart-title">
+              <div>Category Report</div>
+              <!-- <div class="chart-type" (click)='toggleCategoryChartType()'><i class="fa fa-magic"></i></div> -->
+            </div>
+            <div class="chart-content">
+                <div style="height:350px; width: 90%;margin:auto;">
+                    <canvas id="category-chart" height="350"></canvas>
+                </div>
+
+              <!-- <bp-chart *ngIf="showCategoryTrends && itemCategoryChartTypeIndex === 0" [type]="itemCatgeoryChartType" [data]="itemCategoryChartData" [height]="450" [options]="itemCategoryChartOptions"></bp-chart> -->
+              <div text-center class="text-muted" *ngIf="categories.length == 0">
+                No {{selectedItemType == 0 ? 'expenses' : 'income'}} to show trends for the selected dates
+              </div>
+            </div>
+          </div>
+    
+          <!-- Category list -->
+          <div *ngIf="showCategoryTrends" class="report-list">
+            <!-- <div class="title">Weekly By Category</div> -->
+            <div class="report-list-item" *ngFor="let category of itemsGroupedByCategory" (click)="showCategoryItems(category.items)">
+              <div class="category">{{category.categoryName}}</div>
+              <div class="value">
+                <span padding-right><bp-currency></bp-currency>{{category.totalAmount}}</span>
+                <ion-icon name="ios-arrow-forward"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="chart-section">
+            <div class="chart-title">
+              <div>Category Trends - Monthly</div>
+              <!-- <div class="chart-type" (click)='toggleIncomeVsExpenseType()'><ion-icon name="switch"></ion-icon></div> -->
+            </div>
+            <div class="chart-content">
+              <bp-chart *ngIf="showItemCategoryMonthlyChartData" [type]="'line'" [data]="itemCategoryMonthlyChartData" [height]="450" [options]="itemCategoryChartOptions"></bp-chart>
+              <div text-center class="text-muted" *ngIf="!showItemCategoryMonthlyChartData">
+                No trends to show for the selected dates
+              </div>
+            </div>
+          </div>
+    
+        </ion-slide>
+
+        <ion-slide>
+          <!-- Income Expense Tabs -->
+          <!-- <div class="btn-section">
+            <div class="toggle-btns">
+                <button ion-button outline [ngClass]="{'selected': selectedItemType == 0}" (click)="changeItemType(0)">
+                    <div class="title">Expense</div>
+                    <div class="value red">- <bp-currency></bp-currency> {{itemsGroupedByType[0] ? itemsGroupedByType[0].totalAmount : 0}}</div>
+                  </button>
+                  <button ion-button outline [ngClass]="{'selected': selectedItemType == 1}" (click)="changeItemType(1)">
+                      <div class="title">Income</div>
+                      <div class="value green">+ <bp-currency></bp-currency> {{itemsGroupedByType[1] ? itemsGroupedByType[1].totalAmount : 0}}</div>
+                  </button>
+            </div>
+            <div class="totalAmt">TOTAL <span [ngClass]="totalAmount >= 0 ? 'green' : 'red'">({{this.isPositive ? '+' : '-'}} <bp-currency></bp-currency>{{totalAmount * -1}})</span></div>
+          </div> -->
+    
+          <div class="chart-section">
+            <div class="chart-title">
+              <div>Income Vs Expense - Yearly Report</div>
+              <!-- <div class="chart-type" (click)='toggleIncomeVsExpenseType()'><ion-icon name="switch"></ion-icon></div> -->
+            </div>
+            <div class="chart-content">
+              <bp-chart *ngIf="showIncomeVsExpenseChart" [type]="'bar'" [data]="incomeVsExpenseChartData" [height]="450" [options]="incomeVsExpenseChartOptions"></bp-chart>
+              <div text-center class="text-muted" *ngIf="!showIncomeVsExpenseChart">
+                No trends to show for the selected dates
+              </div>
+            </div>
+          </div>
+    
+        </ion-slide>
+    
+        <ion-slide>
+          <div class="chart-section">
+            <div class="chart-title">
+              <div>Income Vs Expense - Monthly Trend</div>
+              <!-- <div class="chart-type" (click)='toggleIncomeVsExpenseType()'><ion-icon name="switch"></ion-icon></div> -->
+            </div>
+            <div class="chart-content">
+              <bp-chart *ngIf="showIncomeVsExpenseMonthlyChart" [type]="'bar'" [data]="incomeVsExpenseMonthlyChartData" [height]="450" [options]="incomeVsExpenseMonthlyChartOptions"></bp-chart>
+              <div text-center class="text-muted" *ngIf="!showIncomeVsExpenseMonthlyChart">
+                No trends to show for the selected dates
+              </div>
+            </div>
+          </div>
+    
+        </ion-slide>
+    
+        <!-- <ion-slide>
+          <div class="chart-section">
+            <div class="chart-title">
+              <div>Income Vs Expense - Weekly Report</div>
+            </div>
+            <div class="chart-content">
+              <bp-chart *ngIf="showIncomeVsExpenseWeeklyChart" [type]="'bar'" [data]="incomeVsExpenseWeeklyChartData" [height]="450" [options]="incomeVsExpenseWeeklyChartOptions"></bp-chart>
+              <div text-center class="text-muted" *ngIf="!showIncomeVsExpenseWeeklyChart">
+                No trends to show for the selected dates
+              </div>
+            </div>
+          </div>
+    
+        </ion-slide> -->
+    
+        
+      
+        <ion-slide>
+          <!-- Weekly trends -->
+          <div class="chart-section">
+            <div class="chart-title">
+              <div>Weekly Expense Trends</div>
+            </div>
+            <div class="chart-content">
+              <bp-chart *ngIf="showWeeklyExpenseChart" [type]="'bar'" [data]="weeklyExpenseChartData" [height]="450" [options]="weeklyExpenseChartOptions"></bp-chart>
+              <div text-center class="text-muted" *ngIf="!showWeeklyExpenseChart">
+                No {{selectedItemType == 0 ? 'expenses' : 'income'}} to show trends
+              </div>
+            </div>
+          </div>
+        </ion-slide>
+    
+        <ion-slide>
+          <!-- Monthly trends -->
+          <div class="chart-section">
+            <div class="chart-title">
+              <div>Monthly Expense Trends</div>
+              <!-- <div class="chart-type" (click)='toggleMonthlyChartType()'><ion-icon name="switch"></ion-icon></div> -->
+            </div>
+            <div class="chart-content">
+              <!-- <bp-chart *ngIf="showMonthlyChart && monthlyChartTypeIndex === 0" [type]="monthlyChartType" [data]="monthlyChartData" [height]="450" [options]="monthlyChartOptions"></bp-chart> -->
+              <bp-chart *ngIf="showMonthlyChart && monthlyChartTypeIndex === 0" [type]="monthlyChartType" [data]="monthlyChartData" [height]="450" [options]="monthlyChartOptions"></bp-chart>
+              <!-- <bp-chart *ngIf="showMonthlyChart && monthlyChartTypeIndex === 2" [type]="monthlyChartType" [data]="monthlyChartData" [height]="450" [options]="monthlyChartOptions"></bp-chart> -->
+              <div text-center class="text-muted" *ngIf="!showMonthlyChart">
+                No {{selectedItemType == 0 ? 'expenses' : 'income'}} to show trends for the selected dates
+              </div>
+            </div>
+          </div>
+        </ion-slide>
+    
+        <ion-slide>
+          <!-- Yearly trends -->
+          <div class="chart-section">
+            <div class="chart-title">
+              <div>Yearly Expense Trends</div>
+            </div>
+            <div class="chart-content">
+              <bp-chart *ngIf="showYearlyExpenseChart" [type]="'bar'" [data]="yearlyExpenseChartData" [height]="450" [options]="yearlyExpenseChartOptions"></bp-chart>
+              <div text-center class="text-muted" *ngIf="!showYearlyExpenseChart">
+                No {{selectedItemType == 0 ? 'expenses' : 'income'}} to show trends for the selected dates
+              </div>
+            </div>
+          </div>
+        </ion-slide>
+    
+    </ion-slides>
+  </div>
+  
+
+  
+
+  
+
+ 
+
+  <!-- <div text-center class="text-muted" *ngIf="!showCategoryTrends && !showMonthlyChart">
+    No data to show for the selected dates
+  </div> -->
+
+
+</ion-content>

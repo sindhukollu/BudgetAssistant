@@ -1,0 +1,88 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>{{editMode ? 'Edit ' : 'Add '}} {{selectedItemType}}</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="dismiss(false)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <div class="datepicker-section">
+        <bp-datepicker #datepicker 
+          [date]="selectedDate" 
+          [timeFrameIndex]="selectedDateRange?.timeFrameIndex" 
+          [showCalendarBtns]="false" 
+          [needDateRange]="false"
+          (onDateChange)="onDateChange($event)">
+        </bp-datepicker>
+
+        <!-- <bp-datepicker [date]="selectedDate" (onDateChange)="onDateChange($event)" ></bp-datepicker> -->
+    </div>
+    <div class="toggle-btns">
+        <button ion-button outline [ngClass]="{'selected': selectedItemTypeIndex == 0}" (click)="changeItemType(0)">Expense</button>
+        <button ion-button outline [ngClass]="{'selected': selectedItemTypeIndex == 1}" (click)="changeItemType(1)">Income</button>
+    </div>
+    <div padding-vertical>
+      <form [formGroup]="cashItemForm">
+          <ion-item>
+            <ion-label floating>Description</ion-label>
+            <ion-input type="text"  formControlName="description"></ion-input>
+          </ion-item>
+          <ion-item (tap)="showCategories()" [ngClass]="{'valid-input': cashItemForm.controls['category'].value}">
+            <ion-label floating>Category</ion-label>
+            <ion-input type="text"  formControlName="category"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Amount</ion-label>
+            <ion-input type="text"  formControlName="amount"></ion-input>
+          </ion-item>
+          <ion-item (tap)="showRecurringOptions()" [ngClass]="{'valid-input': cashItemForm.controls['repeats'].value}">
+            <ion-label floating>Repeats Every</ion-label>
+            <ion-input type="text" formControlName="repeats"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Notes</ion-label>
+            <ion-input type="text"  formControlName="notes"></ion-input>
+          </ion-item>
+      </form>
+    </div>
+    <!-- <div padding-vertical *ngIf="selectedItemTypeIndex == 1">
+      <form [formGroup]="incomeForm">
+          <ion-item>
+            <ion-label floating>Description</ion-label>
+            <ion-input type="text"  formControlName="description"></ion-input>
+          </ion-item>
+          <ion-item (tap)="showCategories(1)" [ngClass]="{'valid-input': incomeForm.controls['category'].value}">
+            <ion-label floating>Category</ion-label>
+            <ion-input type="text"  formControlName="category"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Amount($)</ion-label>
+            <ion-input type="text"  formControlName="amount"></ion-input>
+          </ion-item>
+          <ion-item (tap)="showRecurringOptions()" [ngClass]="{'valid-input': incomeForm.controls['repeats'].value}">
+            <ion-label floating>Repeats</ion-label>
+            <ion-input type="text" formControlName="repeats"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Notes</ion-label>
+            <ion-input type="text"  formControlName="notes"></ion-input>
+          </ion-item>
+      </form>
+    </div> -->
+     
+  </ion-content>
+
+
+  <ion-footer>
+    <ion-toolbar>
+      <!-- <ion-title>ADD</ion-title> -->
+      <button ion-button [disabled]="!cashItemForm.valid" (click)="dismiss(true)">{{editMode ? 'SAVE' : 'ADD'}}</button>
+    </ion-toolbar>
+  </ion-footer>
+  

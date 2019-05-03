@@ -1,0 +1,33 @@
+page-settings {
+    ion-item-group {
+        border-bottom: 1px solid $border;
+    }
+    .list-header{
+        border-bottom: 0;
+        border-top: 0;
+        color: $muted;
+        padding-left: 0;
+        margin-bottom: 0;
+        font-weight: 600;
+    }
+    .item.item-block .item-inner{
+        border-bottom: 0;
+    }
+    .item-block{
+        padding: 0 8px;
+        .icon{
+            color: $primary;
+        }
+        .desc{
+            font-size: 10px;
+            color: $muted;
+        }
+        .select-text{
+            font-size: 14px;
+        }
+    }
+    ion-label{
+        color: $muted;
+        white-space: unset;
+    }
+}

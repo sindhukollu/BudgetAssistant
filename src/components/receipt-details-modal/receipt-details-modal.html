@@ -1,0 +1,57 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">Close</button>
+    </ion-buttons>
+    <ion-title>Receipt Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="receipt-details-modal">
+    <form [formGroup]="receiptForm" class="receipt-details-form">
+      <div class="receipt-details-form-elements">
+        <div class="form-element">
+          <label>Merchant Name</label>
+          <input formControlName="merchantName">
+        </div>
+        <div class="form-element">
+          <label>Merchant Type</label>
+          <input (tap)="showCategories()" [ngClass]="{'valid-input': receiptForm.controls['category'].value}" formControlName="category">
+        </div>
+
+        <div class="form-element">
+          <label>Payment Type</label>
+          <div class="btn-type-element"
+            [ngClass]="{'selected': selectedPaymentType == type}"
+            *ngFor="let type of paymentTypes; let $index = index"
+            (click)="setPaymentType(type)">
+            {{type}}
+          </div>
+        </div>
+
+        <div class="form-element">
+          <label>Total Amount</label>
+          <input formControlName="totalAmount">
+        </div>
+
+        <div class="form-element">
+          <label>Receipt Date</label>
+          <input formControlName="date">
+        </div>
+      </div>
+
+      <!-- <div class="form-submit-btn">
+        <button [ngClass]="{'disabled' : !receiptForm.valid}" [disabled]="!receiptForm.valid" (click)="save()">Save</button>
+      </div> -->
+    </form>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+      <button (click)="save()">Save</button>
+  </ion-toolbar>
+</ion-footer>
+

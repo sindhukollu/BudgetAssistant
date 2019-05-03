@@ -1,0 +1,60 @@
+<div class="datepicker">
+  <span (click)="previousInSelectedTimeFrame()" *ngIf="selectedTimeFrameIndex >-1"><ion-icon name="arrow-back"></ion-icon></span>
+  <span class="padding-0" (click)="toggleShowCalendar()">{{displayText}}</span>
+  <span (click)="nextInSelectedTimeFrame()" *ngIf="selectedTimeFrameIndex >-1"><ion-icon name="arrow-forward"></ion-icon></span>
+</div>
+
+<div class="calendar-wrap" [hidden]="!showCalendar">
+  <div class="calendar-btns" *ngIf="showCalendarBtns">
+      <button ion-button outline [ngClass]="{'selected': selectedTimeFrameIndex == 0}" (click)="setDateToToday()">Today</button>
+      <button ion-button outline [ngClass]="{'selected': selectedTimeFrameIndex == 1}" (click)="setTimeFrame(1)">Week</button>
+      <button ion-button outline [ngClass]="{'selected': selectedTimeFrameIndex == 2}" (click)="setTimeFrame(2)">Month</button>
+      <button ion-button outline [ngClass]="{'selected': selectedTimeFrameIndex == 3}" (click)="setTimeFrame(3)">Year</button>
+  </div>
+  <!-- <div class="mwl-calendar-header">
+      <span (click)="previousMwlCalendarMonth()"><ion-icon name="arrow-back"></ion-icon></span>
+      <span>{{mwlCalendarTitle}}</span>
+      <span (click)="nextMwlCalendarMonth()"><ion-icon name="arrow-forward"></ion-icon></span>
+  </div> -->
+  <!-- <mwl-calendar-month-view
+    [viewDate]="viewDate"
+    [events]="events"
+    (dayClicked)="onDaySelect($event)">
+  </mwl-calendar-month-view> -->
+
+  <div class="date-range" *ngIf="needDateRange">
+    <div class="title" >Custom Date Range</div>
+    <div class="from">
+        <mat-form-field>
+          <label>From</label>
+          <input matInput [matDatepicker]="from" [formControl]="fromDate" disabled>
+          <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+          <mat-datepicker #from disabled="false"></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="from">
+        <mat-form-field>
+            <label>To</label>
+          <input matInput [min]="fromDate.value" [matDatepicker]="to" [formControl]="toDate" disabled>
+          <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+          <mat-datepicker #to disabled="false"></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="done-btn-wrap">
+        <button ion-button outline (click)="selectDateRange()">Ok</button>
+    </div>
+  </div>
+
+  <div class="just-calendar" *ngIf="!needDateRange">
+    <div class="from">
+        <mat-form-field>
+          <!-- <label>From</label> -->
+          <input matInput [matDatepicker]="calendar" [formControl]="calendarSelectedDate" disabled>
+          <mat-datepicker-toggle matSuffix [for]="calendar"></mat-datepicker-toggle>
+          <mat-datepicker #calendar disabled="false"></mat-datepicker>
+        </mat-form-field>
+    </div>
+  </div>
+</div>
+
+

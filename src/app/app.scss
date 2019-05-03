@@ -1,0 +1,222 @@
+// http://ionicframework.com/docs/theming/
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@import './styles/colors';
+
+@import 'node_modules/angular-calendar/scss/angular-calendar';
+
+.cal-month-view {
+    .cal-day-cell{
+        height: 45px;
+        min-height: unset;
+    }
+}
+
+.tabs{
+    .tabbar{
+        border-top: none !important;
+        box-shadow: 0 0 3px rgba(190, 189, 189, 0.3);
+        .tab-button {
+            &[aria-selected="false"] {
+                color: $muted !important;
+                .tab-button-icon{
+                    color: $muted !important;
+                }
+            }
+
+            &[aria-selected="true"] {
+                color: $primary !important;
+                .tab-button-icon{
+                    color: $primary !important;
+                }
+            }
+        }
+    }
+}
+
+.no-data-msg{
+  color: $muted-dark;
+  font-size: 16px;
+  text-align: center;
+  padding: 40px 0;
+}
+
+// override ionic styles
+
+.alert-radio-label{
+    text-transform: capitalize;
+}
+
+.button{
+    height: 3.6em;
+}
+
+// core styles
+
+.text-muted{
+    color: $muted;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.fa{
+    margin-right: -2px;
+}
+
+// margins
+
+.margin-top-30{
+    margin-top: 30px !important;
+}
+.margin-bottom-16{
+    margin-bottom: 16px;
+}
+.padding-horizontal-16{
+    padding: 0 16px;
+}
+
+
+
+
+
+// **************************** MARGINS & PADDINGS ******************
+// generate standard margins and paddings
+// multiples of 8 are google standards
+$margin-padding-values: (0 5 8 10 16 15 20 24 25 30 32 35 40 45 48 50) !default;
+@mixin margins_paddings($values) {
+  // Margin all
+  @each $val in $values {
+    // margins
+    .margin-#{$val} {
+      margin: #{$val}px !important;
+    }
+
+    .margin-top-#{$val},
+    .margin-vertical-#{$val} {
+      margin-top: #{$val}px !important;
+    }
+
+    .margin-bottom-#{$val},
+    .margin-vertical-#{$val} {
+      margin-bottom: #{$val}px !important;
+    }
+
+    .margin-left-#{$val},
+    .margin-horizontal-#{$val} {
+      margin-left: #{$val}px !important;
+    }
+
+    .margin-right-#{$val},
+    .margin-horizontal-#{$val} {
+      margin-right: #{$val}px !important;
+    }
+
+    // paddings
+    .padding-#{$val} {
+      padding: #{$val}px !important;
+    }
+
+    .padding-top-#{$val},
+    .padding-vertical-#{$val} {
+      padding-top: #{$val}px !important;
+    }
+
+    .padding-bottom-#{$val},
+    .padding-vertical-#{$val} {
+      padding-bottom: #{$val}px !important;
+    }
+
+    .padding-left-#{$val},
+    .padding-horizontal-#{$val} {
+      padding-left: #{$val}px !important;
+    }
+
+    .padding-right-#{$val},
+    .padding-horizontal-#{$val} {
+      padding-right: #{$val}px !important;
+    }
+  }
+}
+
+@include margins_paddings($margin-padding-values);
+
+// ******************* END OF MARGINS & PADDINGS ******************
+
+// responsive utilities **** BREAK POINTS *************************//
+@mixin breakpoint($point) {
+  @if $point == extraLarge {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $point == large {
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if $point == notLarge {
+    @media (max-width: 991px) {
+      @content;
+    }
+  } @else if $point == medium {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $point == notMedium {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $point == small {
+    @media (min-width: 577px) {
+      @content;
+    }
+  } @else if $point == xSmall {
+    @media (max-width: 576px) {
+      @content;
+    }
+  } @else if $point == xxSmall {
+    @media (max-width: 320px) {
+      // <= iphone 5
+      @content;
+    }
+  }
+}
+
+// **************** END OF BREAK POINTS *************************//
+
+// **************** MULTILINE ELLIPSE ***************************//
+@mixin multiLineEllipsis($lineHeight, $lineCount, $maxHeight, $bgColor) {
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $maxHeight;
+  text-align: justify;
+  display: block;
+  padding-right: 10px;
+  &:before {
+    content: '...';
+    position: absolute;
+    right: -1px;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    margin-top: -($lineHeight/$lineCount);
+    background: $bgColor;
+  }
+}
+// **************** END OF MULTILINE ELLIPSE ***********************//

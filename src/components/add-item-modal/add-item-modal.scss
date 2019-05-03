@@ -1,0 +1,64 @@
+add-item-modal {
+    .datepicker-section{
+        margin: -16px -16px 16px;
+    }
+    .valid-input{
+        .item-inner{
+            border-bottom-color: #32db64 !important;
+            box-shadow: inset 0 -1px 0 0 #32db64;
+        }
+    }
+    .item-input-has-value{
+        .label{
+            color: $primary !important;
+        }
+    }
+    
+    .toggle-btns{
+        display: flex;
+        .button{
+            flex: 1;
+            height: 36px;
+            margin: 0;
+            border-radius: 0;
+            &.selected{
+                background: $primary;
+                color: $default;
+            }
+        }
+        .button:first-child{
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        .button:last-child{
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        
+    }
+
+    ion-footer{
+        &.footer:before{
+            top: 0;
+        }
+        .toolbar{
+            padding: 0;
+            .toolbar-background{
+                background-color: $default;
+            }
+            button{
+                width: 100%;
+                margin:0;
+            }
+            .toolbar-title{
+                display: flex;
+                justify-content: center;
+            }
+        }
+        .toolbar-md{
+            .button{
+                height: 56px;;
+            }
+        }
+    }
+}
