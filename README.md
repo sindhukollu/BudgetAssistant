@@ -2,13 +2,13 @@ Budget Assistant
 
 Environment Setup - Mac:
 
-1) Install node (https://nodejs.org/en/download/)
-2) Install Angular (npm install -g @angular/cli)
-3) Install Ionic (npm install -g ionic)
-4) Install git (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-5) Clone repository ( git clone https://github.com/sindhukollu/BudgetAssistant.git)
+1) Install node https://nodejs.org/en/download/
+2) Install Angular npm install -g @angular/cli
+3) Install Ionic npm install -g ionic cordova
+4) Install git https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+5) Clone repository  git clone https://github.com/sindhukollu/BudgetAssistant.git
 6) Open project folder in terminal
-7) install packages (npm install)
+7) install packages npm install
 
 WEB: 
 1) Run app to open in browser (ionic serve)
