@@ -11,15 +11,17 @@ Environment Setup - Mac:
 7) install packages npm install
 
 WEB: 
-1) Run app to open in browser (ionic serve)
+1) npm run build 
+2) ionic serve -- To run and open app in browser 
 
 Android:
 https://ionicframework.com/docs/installation/android
 
 1) Install Android Studio for running app in emulator (https://developer.android.com/studio)
-2) npm run build
-3) cordova platform add android
-4) cordova build android
+2) cordova platform add android
+3) cordova build android
+4) Connect device and make sure it is detected by accepting RSA fingerprint on device
+5) cordova run android
 
 IOS:
 https://ionicframework.com/docs/installation/ios
